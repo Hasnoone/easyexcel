@@ -26,6 +26,7 @@ import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.alibaba.excel.util.FileUtils;
 import com.alibaba.excel.write.merge.LoopMergeStrategy;
+import com.alibaba.excel.write.XHDemoData;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.WriteTable;
 import com.alibaba.excel.write.metadata.style.WriteCellStyle;
@@ -360,17 +361,18 @@ public class WriteTest {
     @Test
     public void mergeWrite() {
         // 方法1 注解
+//        String fileName = TestFileUtil.getPath() + "mergeWrite" + System.currentTimeMillis() + ".xlsx";
         String fileName = TestFileUtil.getPath() + "mergeWrite" + System.currentTimeMillis() + ".xlsx";
-        // 在DemoStyleData里面加上ContentLoopMerge注解
+        // 在 DemoStyleData 里面加上 ContentLoopMerge 注解
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
-        EasyExcel.write(fileName, DemoMergeData.class).sheet("模板").doWrite(data());
+//        EasyExcel.write(fileName, DemoMergeData.class).sheet("模板").doWrite(data());
 
         // 方法2 自定义合并单元格策略
-        fileName = TestFileUtil.getPath() + "mergeWrite" + System.currentTimeMillis() + ".xlsx";
+        fileName =  "D:\\mergeWrite" + System.currentTimeMillis() + ".xlsx";
         // 每隔2行会合并 把eachColumn 设置成 3 也就是我们数据的长度，所以就第一列会合并。当然其他合并策略也可以自己写
         LoopMergeStrategy loopMergeStrategy = new LoopMergeStrategy(2, 0);
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
-        EasyExcel.write(fileName, DemoData.class).registerWriteHandler(loopMergeStrategy).sheet("模板").doWrite(data());
+        EasyExcel.write(fileName, XHDemoData.class).registerWriteHandler(loopMergeStrategy).sheet("模板").doWrite(xhData());
     }
 
     /**
@@ -571,9 +573,41 @@ public class WriteTest {
             DemoData data = new DemoData();
             data.setString("字符串" + i);
             data.setDate(new Date());
-            data.setDoubleData(0.56);
+            data.setDoubleData(i + 0.56);
             list.add(data);
         }
+        return list;
+    }
+
+
+
+    private List<XHDemoData> xhData() {
+        List<XHDemoData> list = new ArrayList<XHDemoData>();
+
+
+        XHDemoData data1 = new XHDemoData("何师","成都科华店","2020.08.04","美团");
+        XHDemoData data2 = new XHDemoData("何师","成都科华店","2020.08.04","饿了吗");
+        XHDemoData data9 = new XHDemoData("何师","成都科华店","2020.08.04","总计");
+
+        XHDemoData data7 = new XHDemoData("何师","成都科华店","2020.08.05","美团");
+        XHDemoData data8 = new XHDemoData("何师","成都科华店","2020.08.05","饿了吗");
+        XHDemoData data10 = new XHDemoData("何师","成都科华店","2020.08.05","总计");
+
+        XHDemoData data3 = new XHDemoData("何师","成都高新店","2020.08.05","美团");
+        XHDemoData data4 = new XHDemoData("何师","成都高新店","2020.08.05","饿了吗");
+
+        XHDemoData data5 = new XHDemoData("玉米熊","成都科华店","2020.08.05","饿了吗");
+
+        list.add(data1);
+        list.add(data2);
+        list.add(data9);
+        list.add(data7);
+        list.add(data8);
+        list.add(data10);
+        list.add(data3);
+        list.add(data4);
+        list.add(data5);
+
         return list;
     }
 
