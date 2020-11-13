@@ -69,8 +69,6 @@ public class LoopMergeStrategy extends AbstractRowWriteHandler {
             return;
         }
 
-
-
         if (null != oldRow) {
             Cell oldBrandCell = oldRow.getCell(0);
             String oldBrandVal = oldBrandCell.getStringCellValue();
@@ -86,6 +84,8 @@ public class LoopMergeStrategy extends AbstractRowWriteHandler {
             Cell newDateCell = row.getCell(2);
             String newDateVal = newDateCell.getStringCellValue();
 
+            int firstRow = row.getRowNum() -1;
+            int lastRow = row.getRowNum()-1;
 
             if (oldBrandVal.equals(newBrandVal)) {
                 brandRowCount++;
@@ -95,34 +95,50 @@ public class LoopMergeStrategy extends AbstractRowWriteHandler {
                         dateRowCount++;
                     }
                     else {
-                        CellRangeAddress cellRangeAddress3 = new CellRangeAddress(row.getRowNum() - dateRowCount-1, row.getRowNum()-1,
+                        CellRangeAddress cellRangeAddress3 = new CellRangeAddress(firstRow - dateRowCount, lastRow,
                             2, 2);
+
+                        if (firstRow - dateRowCount!=lastRow) {
+                            writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress3);
+                        }
                         dateRowCount = 0;
-                        writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress3);
                     }
                 } else {
-                    CellRangeAddress cellRangeAddress2 = new CellRangeAddress(row.getRowNum() - storeRowCount-1, row.getRowNum()-1,
+                    CellRangeAddress cellRangeAddress2 = new CellRangeAddress(firstRow - storeRowCount, lastRow,
                         1, 1);
-                    CellRangeAddress cellRangeAddress3 = new CellRangeAddress(row.getRowNum() - dateRowCount-1, row.getRowNum()-1,
+                    CellRangeAddress cellRangeAddress3 = new CellRangeAddress(firstRow - dateRowCount, lastRow,
                         2, 2);
+
+                    if (firstRow - dateRowCount!=lastRow) {
+                        writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress3);
+                    }
+                    if (firstRow - storeRowCount!=lastRow) {
+                        writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress2);
+                    }
                     dateRowCount = 0;
                     storeRowCount = 0;
-                    writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress3);
-                    writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress2);
+
                 }
             } else {
-                CellRangeAddress cellRangeAddress = new CellRangeAddress(row.getRowNum() - brandRowCount-1, row.getRowNum()-1,
+                CellRangeAddress cellRangeAddress = new CellRangeAddress(firstRow - brandRowCount, lastRow,
                     0, 0);
-                CellRangeAddress cellRangeAddress3 = new CellRangeAddress(row.getRowNum() - dateRowCount-1, row.getRowNum()-1,
+                CellRangeAddress cellRangeAddress3 = new CellRangeAddress(firstRow - dateRowCount, lastRow,
                     2, 2);
-                CellRangeAddress cellRangeAddress2 = new CellRangeAddress(row.getRowNum() - storeRowCount-1, row.getRowNum()-1,
+                CellRangeAddress cellRangeAddress2 = new CellRangeAddress(firstRow - storeRowCount, lastRow,
                     1, 1);
+                if (firstRow - brandRowCount!=lastRow) {
+                    writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress);
+                }
+                writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress);
+                if (firstRow - dateRowCount!=lastRow) {
+                    writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress3);
+                }
+                if (firstRow - storeRowCount!=lastRow) {
+                    writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress2);
+                }
                 dateRowCount = 0;
                 storeRowCount = 0;
                 brandRowCount = 0;
-                writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress);
-                writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress3);
-                writeSheetHolder.getSheet().addMergedRegionUnsafe(cellRangeAddress2);
             }
         }
 

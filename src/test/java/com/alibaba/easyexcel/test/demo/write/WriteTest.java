@@ -586,26 +586,26 @@ public class WriteTest {
 
 
         XHDemoData data1 = new XHDemoData("何师","成都科华店","2020.08.04","美团");
-        XHDemoData data2 = new XHDemoData("何师","成都科华店","2020.08.04","饿了吗");
-        XHDemoData data9 = new XHDemoData("何师","成都科华店","2020.08.04","总计");
+//        XHDemoData data2 = new XHDemoData("何师","成都科华店","2020.08.04","饿了吗");
+//        XHDemoData data9 = new XHDemoData("何师","成都科华店","2020.08.04","总计");
 
-        XHDemoData data7 = new XHDemoData("何师","成都科华店","2020.08.05","美团");
-        XHDemoData data8 = new XHDemoData("何师","成都科华店","2020.08.05","饿了吗");
-        XHDemoData data10 = new XHDemoData("何师","成都科华店","2020.08.05","总计");
+//        XHDemoData data7 = new XHDemoData("何师","成都科华店","2020.08.05","美团");
+//        XHDemoData data8 = new XHDemoData("何师","成都科华店","2020.08.05","饿了吗");
+//        XHDemoData data10 = new XHDemoData("何师","成都科华店","2020.08.05","总计");
 
         XHDemoData data3 = new XHDemoData("何师","成都高新店","2020.08.05","美团");
-        XHDemoData data4 = new XHDemoData("何师","成都高新店","2020.08.05","饿了吗");
+//        XHDemoData data4 = new XHDemoData("何师","成都高新店","2020.08.05","饿了吗");
 
         XHDemoData data5 = new XHDemoData("玉米熊","成都科华店","2020.08.05","饿了吗");
 
         list.add(data1);
-        list.add(data2);
-        list.add(data9);
-        list.add(data7);
-        list.add(data8);
-        list.add(data10);
+//        list.add(data2);
+//        list.add(data9);
+//        list.add(data7);
+//        list.add(data8);
+//        list.add(data10);
         list.add(data3);
-        list.add(data4);
+//        list.add(data4);
         list.add(data5);
 
         return list;
