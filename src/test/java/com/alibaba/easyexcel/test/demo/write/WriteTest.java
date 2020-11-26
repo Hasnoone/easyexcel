@@ -370,7 +370,7 @@ public class WriteTest {
         // 方法2 自定义合并单元格策略
         fileName =  "D:\\mergeWrite" + System.currentTimeMillis() + ".xlsx";
         // 每隔2行会合并 把eachColumn 设置成 3 也就是我们数据的长度，所以就第一列会合并。当然其他合并策略也可以自己写
-        LoopMergeStrategy loopMergeStrategy = new LoopMergeStrategy(2, 0);
+        LoopMergeStrategy loopMergeStrategy = new LoopMergeStrategy(xhData().size());
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
         EasyExcel.write(fileName, XHDemoData.class).registerWriteHandler(loopMergeStrategy).sheet("模板").doWrite(xhData());
     }
@@ -582,31 +582,26 @@ public class WriteTest {
 
 
     private List<XHDemoData> xhData() {
-        List<XHDemoData> list = new ArrayList<XHDemoData>();
+        List<XHDemoData> list = new ArrayList<>();
 
 
-        XHDemoData data1 = new XHDemoData("何师","成都科华店","2020.08.04","美团");
-//        XHDemoData data2 = new XHDemoData("何师","成都科华店","2020.08.04","饿了吗");
-//        XHDemoData data9 = new XHDemoData("何师","成都科华店","2020.08.04","总计");
-
-//        XHDemoData data7 = new XHDemoData("何师","成都科华店","2020.08.05","美团");
-//        XHDemoData data8 = new XHDemoData("何师","成都科华店","2020.08.05","饿了吗");
-//        XHDemoData data10 = new XHDemoData("何师","成都科华店","2020.08.05","总计");
-
-        XHDemoData data3 = new XHDemoData("何师","成都高新店","2020.08.05","美团");
-//        XHDemoData data4 = new XHDemoData("何师","成都高新店","2020.08.05","饿了吗");
-
-        XHDemoData data5 = new XHDemoData("玉米熊","成都科华店","2020.08.05","饿了吗");
+        XHDemoData data1 = new XHDemoData("大谷吉头汤面","hell0","2020-11-25","现金支付");
+        XHDemoData data2 = new XHDemoData("大谷吉头汤面","hell0","2020-11-26","合计");
+        XHDemoData data3 = new XHDemoData("张大锤","大咕咕咕鸡","2020-11-25","现金支付");
+        XHDemoData data4 = new XHDemoData("张大锤","大咕咕咕鸡","2020-11-25","银联支付");
+        XHDemoData data5 = new XHDemoData("张大锤","大咕咕咕鸡","2020-11-25","合计");
+        XHDemoData data6 = new XHDemoData("好猪肉","缪坤明","2020-11-25","现金支付");
+        XHDemoData data7 = new XHDemoData("好猪肉","缪坤明","2020-11-26","银联支付");
+        XHDemoData data8 = new XHDemoData("好猪肉","缪坤明","2020-11-27","合计");
 
         list.add(data1);
 //        list.add(data2);
-//        list.add(data9);
+//        list.add(data3);
+//        list.add(data4);
+//        list.add(data5);
+//        list.add(data6);
 //        list.add(data7);
 //        list.add(data8);
-//        list.add(data10);
-        list.add(data3);
-//        list.add(data4);
-        list.add(data5);
 
         return list;
     }
